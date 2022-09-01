@@ -12,6 +12,8 @@ let smokingLayer = L.layerGroup();
 let airPollutionLayer = L.layerGroup();
 let diabetesLayer = L.layerGroup();
 
+let activeLayer = 1;
+
 var map = L.map('map', {
     layers: [noBasemap, visionLayer],
 }).setView([45, 0], 2);
@@ -59,6 +61,9 @@ fetchText(csvUrl).then(text => {
     // console.log(countries);
 
     addVisionLayer();
+    addScreenTimeLayer();
+    addGamersLayer();
+    // addSmokingLayer();
 
     overlays['Age-std prevalence of all vision loss by country 2020'] = visionLayer;
     overlays['Screen Time Statistics'] = screenTimeLayer;
@@ -92,22 +97,77 @@ let getVisionLegend = function(){
             from + '%' + (to ? ' &ndash; ' + to + '%' : '+'));
     }
     str += labels.join('<br>');
-    console.log(str);
+    // console.log(str);
     return str;
 }
 
+let getScreenTimeLegend = function(){
+    let labels = [];
+    let from, to;
+    str = '<h4 align="center">Screen Time <br><span style="text-align: center; font-size: smaller">(hours)</span></h4>';
+    for (var i = 0; i < screenTimeLegendValues.length; i++) {
+        from = screenTimeLegendValues[i];
+        to = screenTimeLegendValues[i + 1];
+
+        labels.push(
+            '<i style="background:' + screenTimeColor(from) + '"></i> ' +
+            from + '' + (to ? ' &ndash; ' + to + '' : '+'));
+    }
+    str += labels.join('<br>');
+    // console.log(str);
+    return str;
+}
+
+let getGamersLegend = function(){
+    let labels = [];
+    let from, to;
+    str = '<h4 align="center">Vision</h4>';
+    for (var i = 0; i < gamersLegendValues.length; i++) {
+        from = gamersLegendValues[i];
+        to = gamersLegendValues[i + 1];
+
+        labels.push(
+            '<i style="background:' + gamersColor(from + 1) + '"></i> ' +
+            from + '%' + (to ? ' &ndash; ' + to + '%' : '+'));
+    }
+    str += labels.join('<br>');
+    // console.log(str);
+    return str;
+}
+
+
 legend.update = function (props) {
     let str = '';
-    if(visionLayer){
+    if(activeLayer==1){
         str += getVisionLegend();
+    }else if(activeLayer == 2){
+        str += getScreenTimeLegend();
+    }else if(activeLayer == 3){
+        str += getGamersLegend();
     }
+
+
     this._div.innerHTML = str;
 };
 
 legend.addTo(map);
 
 map.on('baselayerchange', function (e) {
-    console.log(e.name);
-    console.log(e.layer);
-});
+    // console.log(e.name);
+    // console.log(e.layer);
+    if(e.name=='Age-std prevalence of all vision loss by country 2020'){
+        activeLayer = 1;
+    }else if(e.name=='Screen Time Statistics'){
+        activeLayer = 2;
+    }else if(e.name=='Number of Gamers as a Proportion of Total Population'){
+        activeLayer = 3;
+    }else if(e.name=='Smoking Rates by Country 2022'){
+        activeLayer = 4;
+    }else if(e.name=='Air Pollution'){
+        activeLayer = 5;
+    }else if(e.name=='Diabetes Prevalence'){
+        activeLayer = 6;
+    }
 
+    legend.update();
+});
