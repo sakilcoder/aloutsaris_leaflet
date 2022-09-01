@@ -60,10 +60,10 @@ fetchText(csvUrl).then(text => {
 
     addVisionLayer();
 
-    overlays['Vision'] = visionLayer;
-    overlays['Screen Time'] = screenTimeLayer;
-    overlays['Gamers Percentage'] = gamersLayer;
-    overlays['Smoking'] = smokingLayer;
+    overlays['Age-std prevalence of all vision loss by country 2020'] = visionLayer;
+    overlays['Screen Time Statistics'] = screenTimeLayer;
+    overlays['Number of Gamers as a Proportion of Total Population'] = gamersLayer;
+    overlays['Smoking Rates by Country 2022'] = smokingLayer;
     overlays['Air Pollution'] = airPollutionLayer;
     overlays['Diabetes Prevalence'] = diabetesLayer;
 

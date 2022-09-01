@@ -8,7 +8,7 @@ const fetchText = async (url) => {
 let addVisionLayer = function(){
     visionLayer = L.geoJson(countries, {
         style: visionStyle,
-        // onEachFeature: onEachFeatureState
+        onEachFeature: onEachVision,
         attribution: 'Source: Data from VLEG/GBD 2020 model, accessed via the IAPB Vision Atlas',
     }).addTo(map);  
 }
