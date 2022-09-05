@@ -29,8 +29,22 @@ let addGamersLayer = function(){
 }
 let addSmokingLayer = function(){
     smokingLayer = L.geoJson(countries, {
-        // style: smokingStyle,
-        // onEachFeature: onEachsmoking,
+        style: smokingStyle,
+        onEachFeature: onEachsmoking,
         attribution: 'Source: World Health Organization (WHO)',
+    });
+}
+let addAirPollutionLayer = function(){
+    airPollutionLayer = L.geoJson(countries, {
+        style: airPollutionStyle,
+        onEachFeature: onEachAirPollution,
+        attribution: 'Source: World Health Organization (WHO)',
+    });
+}
+let addDiabetesPrevalenceLayer = function(){
+    diabetesLayer = L.geoJson(countries, {
+        style: diabetesStyle,
+        onEachFeature: onEachDiabetes,
+        attribution: 'Source: International Diabetes Federation (via World Bank)',
     });
 }

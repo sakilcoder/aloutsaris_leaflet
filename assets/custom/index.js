@@ -63,7 +63,9 @@ fetchText(csvUrl).then(text => {
     addVisionLayer();
     addScreenTimeLayer();
     addGamersLayer();
-    // addSmokingLayer();
+    addSmokingLayer();
+    addAirPollutionLayer();
+    addDiabetesPrevalenceLayer();
 
     overlays['Age-std prevalence of all vision loss by country 2020'] = visionLayer;
     overlays['Screen Time Statistics'] = screenTimeLayer;
@@ -121,17 +123,59 @@ let getScreenTimeLegend = function(){
 let getGamersLegend = function(){
     let labels = [];
     let from, to;
-    str = '<h4 align="center">Vision</h4>';
+    str = '<h4 align="center">Gamers</h4>';
     for (var i = 0; i < gamersLegendValues.length; i++) {
         from = gamersLegendValues[i];
         to = gamersLegendValues[i + 1];
-
         labels.push(
             '<i style="background:' + gamersColor(from + 1) + '"></i> ' +
             from + '%' + (to ? ' &ndash; ' + to + '%' : '+'));
     }
     str += labels.join('<br>');
-    // console.log(str);
+    return str;
+}
+let getSmokingLegend = function(){
+    let labels = [];
+    let from, to;
+    str = '<h4 align="center">Smoking Rates</h4>';
+    for (var i = 0; i < smokingLegendValues.length; i++) {
+        from = smokingLegendValues[i];
+        to = smokingLegendValues[i + 1];
+        labels.push(
+            '<i style="background:' + smokingColor(from + 1) + '"></i> ' +
+            from + '%' + (to ? ' &ndash; ' + to + '%' : '+'));
+    }
+    str += labels.join('<br>');
+    return str;
+}
+let getAirPollutionLegend = function(){
+    let labels = [];
+    let from, to;
+    str = '<h4 align="center">Air Pollution</h4>';
+    str += '<p align="center">(micrograms of particles per cubic meter)</p>';
+    for (var i = 0; i < airPollutionStyleLegendValues.length; i++) {
+        from = airPollutionStyleLegendValues[i];
+        to = airPollutionStyleLegendValues[i + 1];
+        labels.push(
+            '<i style="background:' + airPollutionColor(from + 1) + '"></i> ' +
+            from + '' + (to ? ' &ndash; ' + to + '' : '+'));
+    }
+    str += labels.join('<br>');
+    return str;
+}
+
+let getDiabetesLegend = function(){
+    let labels = [];
+    let from, to;
+    str = '<h4 align="center">Diabetes Prevalence</h4>';
+    for (var i = 0; i < diabetesLegendValues.length; i++) {
+        from = diabetesLegendValues[i];
+        to = diabetesLegendValues[i + 1];
+        labels.push(
+            '<i style="background:' + diabetesColor(from + 1) + '"></i> ' +
+            from + '%' + (to ? ' &ndash; ' + to + '%' : '+'));
+    }
+    str += labels.join('<br>');
     return str;
 }
 
@@ -144,6 +188,12 @@ legend.update = function (props) {
         str += getScreenTimeLegend();
     }else if(activeLayer == 3){
         str += getGamersLegend();
+    }else if(activeLayer == 4){
+        str += getSmokingLegend();
+    }else if(activeLayer == 5){
+        str += getAirPollutionLegend();
+    }else if(activeLayer == 6){
+        str += getDiabetesLegend();
     }
 
 
