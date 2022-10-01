@@ -74,7 +74,7 @@ fetchText(csvUrl).then(text => {
     overlays['Air Pollution'] = airPollutionLayer;
     overlays['Diabetes Prevalence'] = diabetesLayer;
 
-    var layerControl = L.control.layers(overlays).addTo(map);
+    var layerControl = L.control.layers(overlays, {}, {collapsed: false}).addTo(map);
 
 });
 
@@ -89,7 +89,7 @@ legend.onAdd = function (map) {
 let getVisionLegend = function(){
     let labels = [];
     let from, to;
-    str = '<h4 align="center">Vision</h4>';
+    str = '<h4 align="center">Vision Loss</h4>';
     for (var i = 0; i < visionLegendValues.length; i++) {
         from = visionLegendValues[i];
         to = visionLegendValues[i + 1];
@@ -106,7 +106,7 @@ let getVisionLegend = function(){
 let getScreenTimeLegend = function(){
     let labels = [];
     let from, to;
-    str = '<h4 align="center">Screen Time <br><span style="text-align: center; font-size: smaller">(hours)</span></h4>';
+    str = '<h4 align="center">Screen Time<br><span style="text-align: center; font-size: smaller">(hours)</span></h4>';
     for (var i = 0; i < screenTimeLegendValues.length; i++) {
         from = screenTimeLegendValues[i];
         to = screenTimeLegendValues[i + 1];
@@ -123,7 +123,7 @@ let getScreenTimeLegend = function(){
 let getGamersLegend = function(){
     let labels = [];
     let from, to;
-    str = '<h4 align="center">Gamers</h4>';
+    str = '<h4 align="center">Gamer Population</h4>';
     for (var i = 0; i < gamersLegendValues.length; i++) {
         from = gamersLegendValues[i];
         to = gamersLegendValues[i + 1];
