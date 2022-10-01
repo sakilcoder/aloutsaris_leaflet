@@ -67,10 +67,10 @@ fetchText(csvUrl).then(text => {
     addAirPollutionLayer();
     addDiabetesPrevalenceLayer();
 
-    overlays['Age-std prevalence of all vision loss by country 2020'] = visionLayer;
-    overlays['Screen Time Statistics'] = screenTimeLayer;
-    overlays['Number of Gamers as a Proportion of Total Population'] = gamersLayer;
-    overlays['Smoking Rates by Country 2022'] = smokingLayer;
+    overlays['Vision Loss'] = visionLayer;
+    overlays['Screen Time'] = screenTimeLayer;
+    overlays['Gamer Population'] = gamersLayer;
+    overlays['Smoking Rates'] = smokingLayer;
     overlays['Air Pollution'] = airPollutionLayer;
     overlays['Diabetes Prevalence'] = diabetesLayer;
 
@@ -205,13 +205,13 @@ legend.addTo(map);
 map.on('baselayerchange', function (e) {
     // console.log(e.name);
     // console.log(e.layer);
-    if(e.name=='Age-std prevalence of all vision loss by country 2020'){
+    if(e.name=='Vision Loss'){
         activeLayer = 1;
-    }else if(e.name=='Screen Time Statistics'){
+    }else if(e.name=='Screen Time'){
         activeLayer = 2;
-    }else if(e.name=='Number of Gamers as a Proportion of Total Population'){
+    }else if(e.name=='Gamer Population'){
         activeLayer = 3;
-    }else if(e.name=='Smoking Rates by Country 2022'){
+    }else if(e.name=='Smoking Rates'){
         activeLayer = 4;
     }else if(e.name=='Air Pollution'){
         activeLayer = 5;

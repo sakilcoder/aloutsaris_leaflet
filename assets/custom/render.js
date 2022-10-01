@@ -57,18 +57,15 @@ function onEachScreenTime(feature, layer) {
         mouseover: highlightFeature,
         mouseout: resetScreenTimeHighlight,
     });
-    
-    if(feature.properties.screen_time != null){
-        var popup = L.popup();
-        let strContent = '<h4 style="text-align: center; border-bottom:1px solid; padding-bottom:5px">' + feature.properties.ADMIN + '</h4><span class="text-center" >Screen Time: <b>' + feature.properties.screen_time + ' hours</b></span>';
-        popup.setContent(strContent);
-        layer.bindPopup(popup, popupOptions);    
-    }
+    console.log(feature.properties.screen_time);
+    var popup = L.popup();
+    let strContent = '<h4 style="text-align: center; border-bottom:1px solid; padding-bottom:5px">' + feature.properties.ADMIN + '</h4><span class="text-center" >Screen Time: <b>' + feature.properties.screen_time + ' hours</b></span>';
+    popup.setContent(strContent);
+    layer.bindPopup(popup, popupOptions);
+
     layer.on('mouseover', function (e) {
-        if(e.sourceTarget.feature.properties.screen_time!=null){
-            var popup = e.target.getPopup();
-            popup.setLatLng(e.latlng).openOn(map);
-        }
+        var popup = e.target.getPopup();
+        popup.setLatLng(e.latlng).openOn(map);
     });
 
     layer.on('mouseout', function (e) {
