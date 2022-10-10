@@ -57,7 +57,7 @@ function onEachScreenTime(feature, layer) {
         mouseover: highlightFeature,
         mouseout: resetScreenTimeHighlight,
     });
-    console.log(feature.properties.screen_time);
+    // console.log(feature.properties.screen_time);
     var popup = L.popup();
     let strContent = '<h4 style="text-align: center; border-bottom:1px solid; padding-bottom:5px">' + feature.properties.ADMIN + '</h4><span class="text-center" >Screen Time: <b>' + feature.properties.screen_time + ' hours</b></span>';
     popup.setContent(strContent);

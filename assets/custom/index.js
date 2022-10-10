@@ -76,9 +76,16 @@ fetchText(csvUrl).then(text => {
 
     var layerControl;
 
-    // let bm = L.easyButton('fa-bars fa-lg', function () {
-
-    // }).setPosition('topright').addTo(map);
+    let layerView = 1;
+    let bm = L.easyButton('fa-map fa-lg', function () {
+        if (layerView == 1) {
+            layerView = 0;
+            $(".leaflet-control-layers").removeClass("leaflet-control-layers-expanded")
+        } else {
+            layerView = 1;
+            $(".leaflet-control-layers").addClass("leaflet-control-layers-expanded")
+        }
+    }).setPosition('topright').addTo(map);
 
     layerControl = L.control.layers(overlays, {}, {collapsed: false}).addTo(map);
     // layerControl.options.collapsed=true;
@@ -233,7 +240,7 @@ map.on('baselayerchange', function (e) {
 let legendView = 1;
 var legendPanel = document.getElementsByClassName("info legend")[0];
 
-let legendIcon = L.easyButton('fa-info fa-lg', function () {
+let legendIcon = L.easyButton('fa-map-signs fa-lg', function () {
     if (legendView == 1) {
         legendView = 0;
         legendPanel.style.display = "none";
