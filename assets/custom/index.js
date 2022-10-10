@@ -26,13 +26,13 @@ L.easyButton('fa-home fa-lg', function () {
     map.setView([45, 0], 2);
 }).addTo(map);
 
-var baseLayers = {
-    'No Basemap': noBasemap,
-    'Carto': basemapCarto,
-    'Google': googleTerrain,
-    'OSM': OpenStreetMap_Mapnik,
-    'Satellite': Esri_WorldImagery,
-};
+// var baseLayers = {
+//     'No Basemap': noBasemap,
+//     'Carto': basemapCarto,
+//     'Google': googleTerrain,
+//     'OSM': OpenStreetMap_Mapnik,
+//     'Satellite': Esri_WorldImagery,
+// };
 
 let overlays ={};
 
@@ -74,9 +74,17 @@ fetchText(csvUrl).then(text => {
     overlays['Air Pollution'] = airPollutionLayer;
     overlays['Diabetes Prevalence'] = diabetesLayer;
 
-    var layerControl = L.control.layers(overlays, {}, {collapsed: false}).addTo(map);
+    var layerControl;
+
+    // let bm = L.easyButton('fa-bars fa-lg', function () {
+
+    // }).setPosition('topright').addTo(map);
+
+    layerControl = L.control.layers(overlays, {}, {collapsed: false}).addTo(map);
+    // layerControl.options.collapsed=true;
 
 });
+
 
 var legend = L.control({ position: 'bottomright' });
 
@@ -221,3 +229,16 @@ map.on('baselayerchange', function (e) {
 
     legend.update();
 });
+
+let legendView = 1;
+var legendPanel = document.getElementsByClassName("info legend")[0];
+
+let legendIcon = L.easyButton('fa-info fa-lg', function () {
+    if (legendView == 1) {
+        legendView = 0;
+        legendPanel.style.display = "none";
+    } else {
+        legendView = 1;
+        legendPanel.style.display = "block";
+    }
+}).setPosition('bottomright').addTo(map);
